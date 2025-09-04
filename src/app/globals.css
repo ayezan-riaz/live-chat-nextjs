@@ -1,0 +1,86 @@
+/* @import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+ */
+
+ /* app/globals.css */
+@import "tailwindcss";
+
+/* Light defaults (Tailwind v4 tokens) */
+@theme inline {
+  /* Fonts */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+
+  /* WhatsApp-like palette (LIGHT) */
+  --color-whatsapp-bg:        #f0f2f5;  /* app background */
+  --color-whatsapp-sidebar:   #ffffff;  /* left column */
+  --color-whatsapp-chat:      #f0f2f5;  /* chat pane */
+  --color-whatsapp-input:     #e9edef;  /* input bg */
+  --color-whatsapp-message:   #dff7c3;  /* sent bubble */
+  --color-whatsapp-received:  #ffffff;  /* received bubble */
+  --color-wp-text:            #111b21;  /* primary text */
+  --color-wp-border:          #d1d7db;  /* borders/dividers */
+}
+
+/* Dark mode: automatically applied when OS is dark */
+@media (prefers-color-scheme: dark) {
+  @theme inline {
+    --color-whatsapp-bg:        #0b141a;
+    --color-whatsapp-sidebar:   #202c33;
+    --color-whatsapp-chat:      #0b141a;
+    --color-whatsapp-input:     #2a3942;
+    --color-whatsapp-message:   #005c4b; /* sent */
+    --color-whatsapp-received:  #202c33; /* received */
+    --color-wp-text:            #e9edef;
+    --color-wp-border:          #2a3942;
+  }
+}
+
+/* Base resets + your global look */
+@layer base {
+  html, body, #__next { height: 100%; }
+  body {
+    @apply bg-whatsapp-bg text-wp-text antialiased;
+    font-family: var(--font-sans);
+  }
+}
+
+/* Components / utilities you referenced */
+@layer components {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+
+  /* Optional: subtle borders that match theme */
+  .wp-divider { border-color: var(--color-wp-border); }
+}
+
+/* (Optional) If you want consistent button look used in your code */
+.button-green {
+  @apply bg-green-600 hover:bg-green-700 disabled:bg-green-800 text-white transition-colors;
+}
